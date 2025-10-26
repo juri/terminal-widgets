@@ -10,6 +10,11 @@ public struct Spinner: Sendable {
         frequency: .milliseconds(100),
     )
 
+    public static let jump = Spinner(
+        frames: ["⢄", "⢂", "⢁", "⡁", "⡈", "⡐", "⡠"],
+        frequency: .milliseconds(100),
+    )
+
     public static let line = Spinner(frames: ["|", "/", "–", #"\"#], frequency: .milliseconds(100))
 
     public static let miniDot = Spinner(
