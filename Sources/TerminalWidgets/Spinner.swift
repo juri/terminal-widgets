@@ -22,6 +22,11 @@ public struct Spinner: Sendable {
         frequency: .milliseconds(100),
     )
 
+    public static let pulse = Spinner(
+        frames: ["█", "▓", "▒", "░", "▒", "▓"],
+        frequency: .milliseconds(200),
+    )
+
     public mutating func reverse() {
         self.frames.reverse()
     }
