@@ -2,8 +2,8 @@ import TerminalANSI
 public import TerminalStyles
 
 public struct Spinner: Sendable {
-    public let frames: [String]
-    public let frequency: Duration
+    public var frames: [String]
+    public var frequency: Duration
 
     public static let line = Spinner(frames: ["|", "/", "–", #"\"#], frequency: .milliseconds(100))
 }
