@@ -11,16 +11,43 @@ import TerminalWidgets
 @main
 struct Runner {
     static func main() async throws {
-        let spinner = Spinner.line
         let style = Style(foreground: [.colorRGB(RGBColor8(hexString: "f00")!), .bold])
         let terminal = Terminal()!
-        for await spinnerFrame in spinner.run(style: style) {
+
+        terminal.writeCodes([
+            .clearScreen,
+            .setCursorHidden(true),
+        ])
+        defer {
             terminal.writeCodes([
-                ANSIControlCode.clearLine,
-                ANSIControlCode.moveCursorToColumn(n: 0),
-                .literal(spinnerFrame),
-                .literal(" spinning!"),
+                .setCursorHidden(false)
             ])
         }
+
+        let spinners: [Spinner] = [
+            .line,
+            .dot,
+            .miniDot,
+        ]
+
+        for (index, spinner) in spinners.enumerated() {
+            Task {
+                for await spinnerFrame in spinner.run(style: style) {
+                    draw(string: spinnerFrame, onLine: index, of: terminal)
+                }
+            }
+        }
+
+        try await Task.sleep(for: .seconds(5))
     }
+}
+
+@MainActor
+private func draw(string: String, onLine line: Int, of terminal: Terminal) {
+    terminal.writeCodes([
+        ANSIControlCode.moveCursor(x: 0, y: line),
+        ANSIControlCode.clearLine,
+        .literal(string),
+        .literal(" spinning!"),
+    ])
 }
