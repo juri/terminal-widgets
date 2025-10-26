@@ -7,6 +7,11 @@ public struct Spinner: Sendable {
 
     public static let line = Spinner(frames: ["|", "/", "–", #"\"#], frequency: .milliseconds(100))
 
+    public static let dot = Spinner(
+        frames: ["⣾", "⣽", "⣻", "⢿", "⡿", "⣟", "⣯", "⣷"],
+        frequency: .milliseconds(100),
+    )
+
     public mutating func reverse() {
         self.frames.reverse()
     }
