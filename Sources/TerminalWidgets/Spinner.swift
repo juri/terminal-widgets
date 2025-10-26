@@ -5,12 +5,12 @@ public struct Spinner: Sendable {
     public var frames: [String]
     public var frequency: Duration
 
-    public static let line = Spinner(frames: ["|", "/", "–", #"\"#], frequency: .milliseconds(100))
-
     public static let dot = Spinner(
         frames: ["⣾", "⣽", "⣻", "⢿", "⡿", "⣟", "⣯", "⣷"],
         frequency: .milliseconds(100),
     )
+
+    public static let line = Spinner(frames: ["|", "/", "–", #"\"#], frequency: .milliseconds(100))
 
     public static let miniDot = Spinner(
         frames: ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"],
