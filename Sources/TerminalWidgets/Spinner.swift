@@ -12,6 +12,11 @@ public struct Spinner: Sendable {
         frequency: .milliseconds(100),
     )
 
+    public static let miniDot = Spinner(
+        frames: ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"],
+        frequency: .milliseconds(100),
+    )
+
     public mutating func reverse() {
         self.frames.reverse()
     }
