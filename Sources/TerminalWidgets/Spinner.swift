@@ -22,6 +22,19 @@ public struct Spinner: Sendable {
         frequency: .milliseconds(100),
     )
 
+    public static func points(length: Int, off: String = "∙", on: String = "●") -> Spinner {
+        precondition(length > 0)
+        let empty = String(repeating: off, count: length)
+        let rest = (0..<length).map { pos in
+            String(repeating: off, count: pos) + on + String(repeating: off, count: length - 1 - pos)
+        }
+
+        return Spinner(
+            frames: [empty] + rest,
+            frequency: .milliseconds(300),
+        )
+    }
+
     public static let pulse = Spinner(
         frames: ["█", "▓", "▒", "░", "▒", "▓"],
         frequency: .milliseconds(200),

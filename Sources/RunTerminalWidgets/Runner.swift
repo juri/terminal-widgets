@@ -30,6 +30,7 @@ struct Runner {
             .miniDot,
             .jump,
             .pulse,
+            .points(length: 4),
         ]
 
         for (index, spinner) in spinners.enumerated() {
