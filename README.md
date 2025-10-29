@@ -5,6 +5,10 @@
 [terminal-ansi]: https://github.com/juri/terminal-ansi
 [terminal-styles]: https://github.com/juri/terminal-styles
 
+## Demo
+
+[![asciicast](https://asciinema.org/a/QkFiTPNBMLsZz9UU8AgfowBUt.svg)](https://asciinema.org/a/QkFiTPNBMLsZz9UU8AgfowBUt)
+
 ## Widgets
 
 ### Spinner
