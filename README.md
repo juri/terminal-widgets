@@ -5,3 +5,13 @@
 [terminal-ansi]: https://github.com/juri/terminal-ansi
 [terminal-styles]: https://github.com/juri/terminal-styles
 
+## Widgets
+
+### Spinner
+
+Spinner is an indeterminate progress indicator that spins through a list of styled strings at a constant rate until
+cancelled.
+
+### Progress
+
+Progress is a progress indicator bar that displays the ratio of completed to total work items.
