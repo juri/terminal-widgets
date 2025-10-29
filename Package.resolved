@@ -1,5 +1,5 @@
 {
-  "originHash" : "54afc76c2695568e6ea03722ab7a9f87bbb20930dae4381009cba6324f035412",
+  "originHash" : "39523583f94afff3fdee2d0144032bbcba22b3a9fc2ab23499808da61ad3c307",
   "pins" : [
     {
       "identity" : "terminal-ansi",
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/juri/terminal-styles.git",
       "state" : {
-        "revision" : "0825565898179f8eac2e0ef20aba641ffe632001",
-        "version" : "0.2.2"
+        "revision" : "9e9e6d6f17e1fbc8df0f5d4f6f5cbf25af270615",
+        "version" : "0.3.0"
       }
     }
   ],

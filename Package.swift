@@ -18,7 +18,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/juri/terminal-ansi.git", from: "0.3.0"),
-        .package(url: "https://github.com/juri/terminal-styles.git", from: "0.2.2"),
+        .package(url: "https://github.com/juri/terminal-styles.git", from: "0.3.0"),
     ],
     targets: [
         .executableTarget(
