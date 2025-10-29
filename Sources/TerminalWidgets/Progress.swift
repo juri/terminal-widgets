@@ -7,6 +7,14 @@
 import Synchronization
 import TerminalStyles
 
+/// `Progress` is a progress bar.
+///
+/// The progress bar represents a progress from start to completion. You instantiate it, update its state
+/// and iterate through the strings yielded by ``stream``. Its completion percentage is calculated from
+/// the total unit count and the completed unit count. The completed unit count is initialized to 0,
+/// and both values can be updated over the lifetime of the `Progress`.
+///
+/// The bar fills from left to right.
 public final class Progress<
     CompleteStyler: PerCharacterStyler & Sendable,
     IncompleteStyler: PerCharacterStyler & Sendable
@@ -29,11 +37,19 @@ public final class Progress<
     private let continuation: AsyncStream<String>.Continuation
     private let state: Mutex<State>
 
+    /// `stream` gives you the progress bar strings to display.
     public let stream: AsyncStream<String>
 
     let completeStyler: CompleteStyler
     let incompleteStyler: IncompleteStyler
 
+    /// Create a `Progress` with the styles, for the given length and total unit count expected at completion.
+    ///
+    /// - Parameters:
+    ///     - completeStyler: The styler to apply to the completed part of the progress bar.
+    ///     - incompleteStyler: The styler to apply to the incomplete part of the progress bar.
+    ///     - length: The total length of the progress bar in characters.
+    ///     - totalUnitCount: The expected unit count at completion.
     public init(
         completeStyler: CompleteStyler,
         incompleteStyler: IncompleteStyler,
@@ -56,6 +72,9 @@ public final class Progress<
         self.continuation = continuation
     }
 
+    /// Update progress bar state.
+    ///
+    /// Nil value for any of the parameters means the progress bar will use the existing value.
     public func setState(
         completedUnitCount: Int? = nil,
         length: Int? = nil,
