@@ -36,17 +36,63 @@ struct Runner {
         for (index, spinner) in spinners.enumerated() {
             Task {
                 for await spinnerFrame in spinner.run(style: style) {
-                    draw(string: spinnerFrame, onLine: index, of: terminal)
+                    drawSpinner(string: spinnerFrame, onLine: index, of: terminal)
                 }
             }
         }
 
-        try await Task.sleep(for: .seconds(5))
+        let progressLength = try terminal.size().width - 20
+        let progressForegroundColor = RGBColor8(hexString: "#002")!
+        let progressForeground = Style(foreground: [.colorRGB(progressForegroundColor)])
+        let progressForegroundStyler = ConstantPerCharacterStyler(style: progressForeground)
+        let progressFilledBackgroundStyler = HorizontalBackgroundPerCharacterStyler(
+            linearGradientLength: progressLength,
+            stops: [
+                (0.0, RGBColor8(hexString: "#8080ff")!),
+                (1.0, RGBColor8(hexString: "#80ff80")!),
+            ],
+        )!
+        let progressUnfilledBackgroundStyler = ConstantPerCharacterStyler(
+            style: Style(
+                background: .colorRGB(RGBColor8(hexString: "#CCC")!),
+            )
+        )
+        let progressFilledStyler = JoinedPerCharacterStyler(
+            styler1: progressForegroundStyler,
+            styler2: progressFilledBackgroundStyler,
+        )
+        let progressUnfilledStyler = JoinedPerCharacterStyler(
+            styler1: progressForegroundStyler,
+            styler2: progressUnfilledBackgroundStyler,
+        )
+        let progress = Progress(
+            completeStyler: progressFilledStyler,
+            incompleteStyler: progressUnfilledStyler,
+            length: progressLength,
+            totalUnitCount: 100,
+        )
+        Task {
+            for await progressFrame in progress.stream {
+                terminal.writeCodes([
+                    ANSIControlCode.moveCursor(x: 10, y: 10),
+                    .literal(progressFrame),
+                ])
+            }
+        }
+
+        Task {
+            for i in 1...100 {
+                progress.setState(completedUnitCount: i)
+                try await Task.sleep(for: .milliseconds(75))
+            }
+        }
+
+        try await Task.sleep(for: .seconds(10))
     }
 }
 
 @MainActor
-private func draw(string: String, onLine line: Int, of terminal: Terminal) {
+private func drawSpinner(string: String, onLine line: Int, of terminal: Terminal) {
     terminal.writeCodes([
         ANSIControlCode.moveCursor(x: 0, y: line),
         ANSIControlCode.clearLine,
