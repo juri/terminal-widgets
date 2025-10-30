@@ -24,3 +24,10 @@ cancelled.
 ### Progress
 
 Progress is a progress indicator bar that displays the ratio of completed to total work items.
+
+## Documentation
+
+[Documentation] and `Package.swift` snippets are available at [Swift Package Index].
+
+[Documentation]: https://swiftpackageindex.com/juri/terminal-widgets/documentation/terminalwidgets
+[Swift Package Index]: https://swiftpackageindex.com/juri/terminal-widgets
